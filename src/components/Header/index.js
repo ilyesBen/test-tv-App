@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {theme} from '@theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#808080',
+    backgroundColor: theme.header,
     justifyContent: 'center',
     alignItems: 'center',
     height: 150,

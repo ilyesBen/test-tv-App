@@ -10,13 +10,29 @@ export const fetchVideos = async () => {
 
 export const useVideos = () => {
   const [videos, setVideos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [reFetchVideos, setReFetchVideos] = useState(true);
+  const [error, setError] = useState('');
+
   useEffect(() => {
     const getVideos = async () => {
-      const videosFetched = await fetchVideos(urlVideo);
-      setVideos(videosFetched.items);
+      try {
+        const videosFetched = await fetchVideos();
+        setVideos(videosFetched.items);
+        setIsLoading(false);
+        setError('');
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+      }
     };
     getVideos();
-  }, []);
+  }, [reFetchVideos]);
 
-  return [...videos, ...videos, ...videos, ...videos];
+  return [
+    [...videos, ...videos, ...videos, ...videos],
+    isLoading,
+    error,
+    setReFetchVideos,
+  ];
 };

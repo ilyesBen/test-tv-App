@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text, Animated, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, TouchableHighlight} from 'react-native';
 import Image from 'react-native-fast-image';
 
 const size = 500;
@@ -10,9 +10,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     margin: 10,
-    height: size - 30,
+    height: size - 20,
     width: size,
     borderRadius: 20,
+    padding: 10,
   },
   title: {
     fontSize: 24,
@@ -23,19 +24,24 @@ const styles = StyleSheet.create({
 });
 
 export const Video = ({video, onPress}) => {
-  //   console.log('video ', video);
+  const [focused, setFocused] = useState(false);
   const {width, height, url: uri} = video.snippet.thumbnails.high;
 
-  console.log('url ', uri);
-  console.log('width ', width);
-  console.log('height ', height);
+  const animatedStyle = {
+    opacity: focused ? 0.7 : 1,
+    transform: [{scale: focused ? 0.95 : 1}],
+  };
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
+    <TouchableHighlight
+      onPress={onPress}
+      onBlur={() => setFocused(false)}
+      onFocus={() => setFocused(true)}
+      style={[styles.container, animatedStyle]}>
+      <>
         <Image source={{uri}} style={{width, height}} />
         <Text style={styles.title}>{video.snippet.title}</Text>
-      </View>
-    </TouchableOpacity>
+      </>
+    </TouchableHighlight>
   );
 };
