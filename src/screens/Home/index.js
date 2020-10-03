@@ -45,7 +45,7 @@ const Home: () => React$Node = () => {
   const [videos, loading, error, reFetchVideos] = useVideos();
 
   const renderItem = ({item}) => (
-    <Video video={item} onPress={() => alert('Hello guys')} />
+    <Video video={item} onPress={() => alert(item.snippet.description)} />
   );
 
   if (error) {
