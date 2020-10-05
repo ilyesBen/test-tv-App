@@ -1,6 +1,14 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableHighlight} from 'react-native';
-import Image from 'react-native-fast-image';
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  Image as RNImage,
+  Platform,
+} from 'react-native';
+
+const Image =
+  Platform.OS === 'macos' ? RNImage : require('react-native-fast-image');
 
 const size = 500;
 
