@@ -45,6 +45,8 @@ export const Video = ({video, onPress}) => {
       onPress={onPress}
       onBlur={() => setFocused(false)}
       onFocus={() => setFocused(true)}
+      onPressIn={() => setFocused(true)}
+      onPressOut={() => setFocused(false)}
       style={[styles.container, animatedStyle]}>
       <>
         <Image source={{uri}} style={{width, height}} />
