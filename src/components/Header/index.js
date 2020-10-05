@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.header,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 150,
+    height: 100,
   },
   title: {
     fontSize: 38,

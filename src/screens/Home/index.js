@@ -7,7 +7,14 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, FlatList, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 
 import {useVideos} from '@modules/videos';
 import {Video, Header, Spinner} from '@components';
@@ -59,7 +66,7 @@ const Home: () => React$Node = () => {
 
   return (
     <>
-      {/* <Header /> */}
+      {Platform.OS === 'macos' && <Header />}
       <View style={styles.listContainer}>
         {!loading ? (
           <FlatList

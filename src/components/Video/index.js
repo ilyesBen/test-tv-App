@@ -7,10 +7,11 @@ import {
   Platform,
 } from 'react-native';
 
-const Image =
-  Platform.OS === 'macos' ? RNImage : require('react-native-fast-image');
+const isMAcOS = Platform.OS === 'macos';
 
-const size = 500;
+const Image = isMAcOS ? RNImage : require('react-native-fast-image');
+
+const size = isMAcOS ? 350 : 500;
 
 const styles = StyleSheet.create({
   container: {
@@ -33,7 +34,9 @@ const styles = StyleSheet.create({
 
 export const Video = ({video, onPress}) => {
   const [focused, setFocused] = useState(false);
-  const {width, height, url: uri} = video.snippet.thumbnails.high;
+  const {high, medium} = video.snippet.thumbnails;
+
+  const {width, height, url: uri} = isMAcOS ? medium : high;
 
   const animatedStyle = {
     opacity: focused ? 0.7 : 1,
