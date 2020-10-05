@@ -60,3 +60,4 @@ buck-out/
 
 # ENV
 .env
+macos.config.js

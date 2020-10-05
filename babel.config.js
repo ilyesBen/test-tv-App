@@ -13,6 +13,7 @@ module.exports = {
           '@screens': './src/screens',
           '@navigator': './src/navigator',
           '@theme': './src/theme',
+          '@macos-config': './macos.config.js',
         },
       },
     ],
