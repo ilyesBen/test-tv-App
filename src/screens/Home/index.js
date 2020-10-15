@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -19,6 +19,7 @@ import {
 import {useVideos} from '@modules/videos';
 import {Video, Header, Spinner} from '@components';
 import {theme} from '@theme';
+import {SCREEN_WIDTH, SCREEN_THRESHOLD} from '@constants';
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -39,7 +40,6 @@ const styles = StyleSheet.create({
     color: theme.onSurface,
     fontSize: 38,
   },
-  buttonContainer: {},
 });
 
 const Button = ({text, onPress}) => (
@@ -73,7 +73,7 @@ const Home: () => React$Node = () => {
             data={videos}
             renderItem={renderItem}
             keyExtractor={(item, index) => `${item.id}-${index}`}
-            numColumns={3}
+            numColumns={SCREEN_WIDTH > SCREEN_THRESHOLD ? 3 : 2}
             scrollEnabled
           />
         ) : (

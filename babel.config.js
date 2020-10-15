@@ -14,6 +14,7 @@ module.exports = {
           '@navigator': './src/navigator',
           '@theme': './src/theme',
           '@macos-config': './macos.config.js',
+          '@constants': './src/constants',
         },
       },
     ],

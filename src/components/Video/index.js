@@ -5,13 +5,14 @@ import {
   TouchableHighlight,
   Image as RNImage,
   Platform,
+  View,
 } from 'react-native';
+import {SCREEN_WIDTH, SCREEN_THRESHOLD} from '@constants';
 
 const isMAcOS = Platform.OS === 'macos';
-
 const Image = isMAcOS ? RNImage : require('react-native-fast-image');
 
-const size = isMAcOS ? 350 : 500;
+const size = SCREEN_WIDTH < SCREEN_THRESHOLD ? 400 : 600;
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +37,8 @@ export const Video = ({video, onPress}) => {
   const [focused, setFocused] = useState(false);
   const {high, medium} = video.snippet.thumbnails;
 
-  const {width, height, url: uri} = isMAcOS ? medium : high;
+  const {width, height, url: uri} =
+    SCREEN_WIDTH < SCREEN_THRESHOLD ? medium : high;
 
   const animatedStyle = {
     opacity: focused ? 0.7 : 1,
@@ -44,17 +46,19 @@ export const Video = ({video, onPress}) => {
   };
 
   return (
-    <TouchableHighlight
-      onPress={onPress}
-      onBlur={() => setFocused(false)}
-      onFocus={() => setFocused(true)}
-      onPressIn={() => setFocused(true)}
-      onPressOut={() => setFocused(false)}
-      style={[styles.container, animatedStyle]}>
-      <>
-        <Image source={{uri}} style={{width, height}} />
-        <Text style={styles.title}>{video.snippet.title}</Text>
-      </>
-    </TouchableHighlight>
+    <View>
+      <TouchableHighlight
+        onPress={onPress}
+        onBlur={() => setFocused(false)}
+        onFocus={() => setFocused(true)}
+        onPressIn={() => setFocused(true)}
+        onPressOut={() => setFocused(false)}
+        style={[styles.container, animatedStyle]}>
+        <>
+          <Image source={{uri}} style={{width, height}} />
+          <Text style={styles.title}>{video.snippet.title}</Text>
+        </>
+      </TouchableHighlight>
+    </View>
   );
 };
